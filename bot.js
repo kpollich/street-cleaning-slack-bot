@@ -31,7 +31,7 @@ class Bot {
           if (isStreetCleaningDay(new Date())) {
             this.bot.postMessage(
               message.channel,
-              'Today is a street cleaning day'
+              ':rotating_light: Today is a street cleaning day!!! :rotating_light:'
             )
           } else {
             this.bot.postMessage(
@@ -66,8 +66,8 @@ class Bot {
  * @param {Date} date
  */
 function isStreetCleaningDay(date) {
-  const isWednesday = date.getDay === 3
-  const isThursday = date.getDay === 4
+  const isWednesday = date.getDay() === 3
+  const isThursday = date.getDay() === 4
 
   if (!isWednesday && !isThursday) {
     return false
@@ -77,7 +77,10 @@ function isStreetCleaningDay(date) {
   const momentDate = moment(date)
 
   const isFirstOfMonth = momentDate.day(-7).month() === momentDate.month() - 1
-  const isThirdOfMonth = momentDate.day(7).month() === momentDate.month() + 1
+
+  const isThirdOfMonth =
+    momentDate.day(-14).month() === momentDate.month() &&
+    momentDate.day(7).month() === momentDate.month()
 
   return isFirstOfMonth || isThirdOfMonth
 }
