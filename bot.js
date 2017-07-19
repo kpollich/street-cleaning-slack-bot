@@ -48,7 +48,7 @@ class Bot {
    * Check if today is a street cleaning day, then alert the #lancaster channel in Slack.
    * If today is not a street cleaning day, does nothing.
    */
-  performAlert() {
+  performDailyAlert() {
     if (isStreetCleaningDay(new Date())) {
       // Send a message to the Lancaster channel that it's a street cleaning day + return
       // TODO: Handle error responses from Slack - this can be Promise chained
@@ -62,13 +62,13 @@ class Bot {
 
 /**
  * Returns true if the given date is a street cleaning day
+ * Street cleaning occurs on the first and third Wednesday and Thursday of each month
  * @param {Date} date
  */
 function isStreetCleaningDay(date) {
   const isWednesday = date.getDay === 3
   const isThursday = date.getDay === 4
 
-  // If this is not a Wednesday or Thursday, it cannot be a street cleaning day
   if (!isWednesday && !isThursday) {
     return false
   }
@@ -76,15 +76,10 @@ function isStreetCleaningDay(date) {
   // Wrap the date with moment to make manipulating it more sane
   const momentDate = moment(date)
 
-  // Is this the first Wednesday or Thursday of the month?
-  const isFirstOfMonth =
-    momentDate.day(-7).getMonth() === momentDate.getMonth() - 1
+  const isFirstOfMonth = momentDate.day(-7).month() === momentDate.month() - 1
+  const isThirdOfMonth = momentDate.day(7).month() === momentDate.month() + 1
 
-  // Is this the last Wednesday or Thursday of the month?
-  const isLastOfMonth =
-    momentDate.day(7).getMonth() === momentDate.getMonth() + 1
-
-  return isFirstOfMonth || isLastOfMonth
+  return isFirstOfMonth || isThirdOfMonth
 }
 
 module.exports = Bot
