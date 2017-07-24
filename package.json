@@ -6,10 +6,12 @@
   "dependencies": {
     "dotenv": "^4.0.0",
     "moment": "^2.18.1",
+    "pm2": "^2.6.1",
     "slackbots": "^1.0.2"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "pm2 start index.js",
+    "stop": "pm2 stop index.js",
     "daily-alert": "node daily-alert.js"
   }
 }
