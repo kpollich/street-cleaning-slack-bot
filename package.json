@@ -10,6 +10,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "daily-alert": "node script.js"
+    "daily-alert": "node daily-alert.js"
   }
 }

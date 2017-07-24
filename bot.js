@@ -54,7 +54,7 @@ class Bot {
       // TODO: Handle error responses from Slack - this can be Promise chained
       this.bot.postMessageToChannel(
         'lancaster',
-        '@channel - Today is a street cleaning day'
+        '@channel - :rotating_light: Today is a street cleaning day!!! :rotating_light:'
       )
     }
   }
