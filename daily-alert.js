@@ -8,5 +8,3 @@ const bot = new Bot({
 })
 
 bot.performDailyAlert().then(() => process.exit(1))
-
-
