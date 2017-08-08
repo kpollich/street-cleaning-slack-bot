@@ -50,8 +50,6 @@ class Bot {
    */
   alert() {
     if (isStreetCleaningDay(new Date())) {
-      // Send a message to the Lancaster channel that it's a street cleaning day + return
-      // TODO: Handle error responses from Slack - this can be Promise chained
       return this.bot.postMessageToChannel(
         'lancaster',
         '@channel - :rotating_light: Today is a street cleaning day!!! :rotating_light:'
