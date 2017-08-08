@@ -7,4 +7,4 @@ const bot = new Bot({
   name: 'Street Cleaning Bot'
 })
 
-bot.performDailyAlert().then(() => process.exit(1))
+bot.alert().then(() => process.exit(0)).catch(error => console.error(error))

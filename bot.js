@@ -48,7 +48,7 @@ class Bot {
    * Check if today is a street cleaning day, then alert the #lancaster channel in Slack.
    * If today is not a street cleaning day, does nothing.
    */
-  performDailyAlert() {
+  alert() {
     if (isStreetCleaningDay(new Date())) {
       // Send a message to the Lancaster channel that it's a street cleaning day + return
       // TODO: Handle error responses from Slack - this can be Promise chained

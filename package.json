@@ -12,7 +12,7 @@
   "scripts": {
     "start": "pm2 start index.js",
     "stop": "pm2 stop index.js",
-    "daily-alert": "node daily-alert.js",
+    "alert": "node alert.js",
     "precommit": "lint-staged"
   },
   "lint-staged": {
