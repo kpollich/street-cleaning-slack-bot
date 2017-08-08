@@ -7,6 +7,6 @@ const bot = new Bot({
   name: 'Street Cleaning Bot'
 })
 
-bot.performDailyAlert()
+bot.performDailyAlert().then(() => process.exit(1))
 
 
