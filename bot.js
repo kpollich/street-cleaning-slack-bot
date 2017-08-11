@@ -5,14 +5,10 @@ const SlackBot = require('slackbots')
  * Contains logic for interfacing with Slack via the bot user + SlackBots module
  */
 class Bot {
-  constructor({ token, name }) {
-    this.token = token
-    this.name = name
+  constructor({ token, name, alertChannel }) {
+    this.alertChannel = alertChannel
 
-    this.bot = new SlackBot({
-      token: process.env.SLACK_API_TOKEN,
-      name: 'Street Cleaning Bot'
-    })
+    this.bot = new SlackBot({ token, name })
   }
 
   /**
@@ -45,14 +41,13 @@ class Bot {
   }
 
   /**
-   * Check if today is a street cleaning day, then alert the #lancaster channel in Slack.
-   * If today is not a street cleaning day, does nothing.
+   * Check if today is a street cleaning day, then alert the provided channel if needed.
    */
   alert() {
     if (isStreetCleaningDay(new Date())) {
       return this.bot.postMessageToChannel(
-        'lancaster',
-        '@channel - :rotating_light: Today is a street cleaning day!!! :rotating_light:'
+        this.alertChannel,
+        ':rotating_light: Today is a street cleaning day!!! :rotating_light:'
       )
     }
 
@@ -76,11 +71,13 @@ function isStreetCleaningDay(date) {
   // Wrap the date with moment to make manipulating it more sane
   const momentDate = moment(date)
 
-  const isFirstOfMonth = momentDate.day(-7).month() === momentDate.month() - 1
+  // Have to make use of moment's `clone` method here to avoid mutability issues
+  const isFirstOfMonth =
+    momentDate.clone().day(-7).month() === momentDate.clone().month(-1)
 
   const isThirdOfMonth =
-    momentDate.day(-14).month() === momentDate.month() &&
-    momentDate.day(7).month() === momentDate.month()
+    momentDate.clone().day(-14).month() === momentDate.month() &&
+    momentDate.clone().day(7).month() === momentDate.month()
 
   return isFirstOfMonth || isThirdOfMonth
 }
