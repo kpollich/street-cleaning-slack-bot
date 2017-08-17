@@ -14,22 +14,19 @@
     "start": "pm2 start index.js",
     "stop": "pm2 stop index.js",
     "alert": "node alert.js",
-     "precommit": "lint-staged",
-     "test": "yarn lint && echo 'No tests yet'",
-     "lint": "eslint *.js"
-   },
-   "lint-staged": {
-     "*.js": [
-       "prettier --write --no-semi --single-quote",
-       "git add"
-     ]
-   },
-   "devDependencies": {
-     "eslint": "^4.4.1",
-     "eslint-config-prettier": "^2.3.0",
-     "eslint-plugin-prettier": "^2.1.2",
-     "husky": "^0.14.3",
-     "lint-staged": "^4.0.3",
-     "prettier": "^1.5.3"
-   }
- }
+    "precommit": "lint-staged",
+    "test": "yarn lint && echo 'No tests yet'",
+    "lint": "eslint *.js"
+  },
+  "lint-staged": {
+    "*.js": ["prettier --write --no-semi --single-quote", "git add"]
+  },
+  "devDependencies": {
+    "eslint": "^4.4.1",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.3",
+    "prettier": "^1.5.3"
+  }
+}
