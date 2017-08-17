@@ -1,4 +1,4 @@
-const moment = require('moment')
+const momentTimezone = require('moment-timezone')
 const SlackBot = require('slackbots')
 
 /**
@@ -69,15 +69,15 @@ function isStreetCleaningDay(date) {
   }
 
   // Wrap the date with moment to make manipulating it more sane
-  const momentDate = moment(date)
+  const momentDate = momentTimezone(date).tz('America/New_York')
 
   // Have to make use of moment's `clone` method here to avoid mutability issues
   const isFirstOfMonth =
-    momentDate.clone().day(-7).month() === momentDate.clone().month(-1)
+    momentDate.clone().subtract(1, 'weeks').month() === momentDate.clone().subtract(1, 'months')
 
   const isThirdOfMonth =
-    momentDate.clone().day(-14).month() === momentDate.month() &&
-    momentDate.clone().day(7).month() === momentDate.month()
+    momentDate.clone().subtract(2, 'weeks').month() === momentDate.month() &&
+    momentDate.clone().add(1, 'weeks').month() === momentDate.month()
 
   return isFirstOfMonth || isThirdOfMonth
 }
