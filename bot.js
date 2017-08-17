@@ -73,7 +73,8 @@ function isStreetCleaningDay(date) {
 
   // Have to make use of moment's `clone` method here to avoid mutability issues
   const isFirstOfMonth =
-    momentDate.clone().subtract(1, 'weeks').month() === momentDate.clone().subtract(1, 'months')
+    momentDate.clone().subtract(1, 'weeks').month() ===
+    momentDate.clone().subtract(1, 'months')
 
   const isThirdOfMonth =
     momentDate.clone().subtract(2, 'weeks').month() === momentDate.month() &&
