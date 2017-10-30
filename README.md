@@ -19,6 +19,8 @@ SLACK_API_TOKEN=secret123
 ALERT_CHANNEL=cool-channel
 ```
 
+This PR is for hacktoberfest. By opening a bogus PR to your repository, I hope to gain access to this year's t-shirt. Please disregard this PR.
+
 ## Usage
 
 The bot expects a `SLACK_API_TOKEN` environment variable to be defined. You can define this variable in a `.env` file. You'll need to create a Slack "Bot" user and use the provided token to authenticate. See Slack's [documentation](https://api.slack.com/bot-users) for more information.
