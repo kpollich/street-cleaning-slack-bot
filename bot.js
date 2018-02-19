@@ -1,6 +1,8 @@
 const momentTimezone = require("moment-timezone");
 const SlackBot = require("slackbots");
 
+const { isStreetCleaningDay } = require("./utils");
+
 /**
  * Contains logic for interfacing with Slack via the bot user + SlackBots module
  */
@@ -53,34 +55,6 @@ class Bot {
 
     return Promise.resolve();
   }
-}
-
-/**
- * Returns true if the given date is a street cleaning day
- * Street cleaning occurs on the first and third Wednesday and Thursday of each month
- * @param {Date} date
- */
-function isStreetCleaningDay(date) {
-  const isWednesday = date.getDay() === 3;
-  const isThursday = date.getDay() === 4;
-
-  if (!isWednesday && !isThursday) {
-    return false;
-  }
-
-  // Wrap the date with moment to make manipulating it more sane
-  const momentDate = momentTimezone(date).tz("America/New_York");
-
-  // Have to make use of moment's `clone` method here to avoid mutability issues
-  const isFirstOfMonth =
-    momentDate.clone().subtract(1, "weeks").month() ===
-    momentDate.clone().subtract(1, "months");
-
-  const isThirdOfMonth =
-    momentDate.clone().subtract(2, "weeks").month() === momentDate.month() &&
-    momentDate.clone().add(1, "weeks").month() === momentDate.month();
-
-  return isFirstOfMonth || isThirdOfMonth;
 }
 
 module.exports = Bot;
