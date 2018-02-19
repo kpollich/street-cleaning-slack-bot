@@ -1,4 +1,4 @@
-const momentTimezone = require("moment-timezone");
+const moment = require("moment");
 
 /**
  * Returns true if the given date is a street cleaning day
@@ -15,7 +15,7 @@ exports.isStreetCleaningDay = date => {
   }
 
   // Wrap the date with moment to make manipulating it more sane
-  const momentDate = momentTimezone(date).tz("America/New_York");
+  const momentDate = moment(date);
 
   // Have to make use of moment's `clone` method here to avoid mutability issues
   const isFirstOfMonth =
