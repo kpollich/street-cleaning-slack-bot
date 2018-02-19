@@ -16,10 +16,14 @@
     "alert": "node alert.js",
     "precommit": "lint-staged",
     "test": "yarn lint && echo 'No tests yet'",
-    "lint": "eslint *.js"
+    "lint": "eslint *.js",
+    "format": "prettier --write **/*.js"
   },
   "lint-staged": {
-    "*.js": ["prettier --write --no-semi --single-quote", "git add"]
+    "*.js": [
+      "yarn format",
+      "git add"
+    ]
   },
   "devDependencies": {
     "eslint": "^4.4.1",
