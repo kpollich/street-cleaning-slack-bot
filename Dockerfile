@@ -12,6 +12,6 @@ RUN yarn install
 
 COPY . .
 
-RUN echo '30 7 * * 3,4 cd /usr/src/app && yarn alert' > /etc/crontabs/root
+RUN echo '0 7 * * 3,4 cd /usr/src/app && yarn alert' > /etc/crontabs/root
 
 CMD ["./init.sh"]
