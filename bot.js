@@ -17,6 +17,7 @@ class Bot {
    * Starts the bot in "daemon" mode - wires up callbacks so the bot can monitor incoming messages
    */
   start() {
+    console.log("Starting bot");
     this.bot.on("message", message => {
       if (message.type !== "message") {
         return;
@@ -26,6 +27,7 @@ class Bot {
         const isMention = message.text.includes(userId);
 
         if (isMention) {
+          console.log("Bot received mention");
           if (isStreetCleaningDay(new Date())) {
             this.bot.postMessage(
               message.channel,
@@ -46,6 +48,7 @@ class Bot {
    * Check if today is a street cleaning day, then alert the provided channel if needed.
    */
   alert() {
+    console.log("Checking for street cleaning day");
     if (isStreetCleaningDay(new Date())) {
       return this.bot.postMessageToChannel(
         this.alertChannel,
